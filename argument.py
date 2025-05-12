@@ -32,13 +32,13 @@ class ArgumentParser(argparse.ArgumentParser):
 
         return argument
      
-    def parse_args(self) -> argparse.Namespace:
+    def parse_args(self, *args, **kwargs) -> argparse.Namespace:
         """
         Обертка над argparse. Принимает те же значения что и оригинал, возвращает argparse.Namespace с именованными полями.
         Значения в полях модифицированы валидаторами.
         """
         try:
-            parsed_args = super().parse_args() 
+            parsed_args = super().parse_args(*args, *kwargs) 
         except Exception as e:
             print(f"Argument parsing error: \n{e}")
             sys.exit(1)
