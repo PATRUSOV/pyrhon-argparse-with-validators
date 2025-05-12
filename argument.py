@@ -1,6 +1,6 @@
 import argparse
 import sys
-from typing import Callable, Namespace, Any
+from typing import Callable, Any
 
 class ArgumentParser(argparse.ArgumentParser):
     """Обертка на argparse с добавлением автоматической валидации."""
@@ -12,7 +12,7 @@ class ArgumentParser(argparse.ArgumentParser):
     def add_argument(
         self,
         *args,
-        validator: Callable[[str], Any] = None, 
+        validator: Callable[[Any], Any] = None, 
         **kwargs
     ):
         """
@@ -20,7 +20,7 @@ class ArgumentParser(argparse.ArgumentParser):
         
         Аргументы:
             validator: функция для проверки/преобразования аргумента.
-                        Принимает единственным аргументом str возвращает Any.
+                        Принимает единственным аргументом Any возвращает Any.
 
         """
         argument = super().add_argument(*args, **kwargs)
@@ -32,9 +32,9 @@ class ArgumentParser(argparse.ArgumentParser):
 
         return argument
      
-    def parse_args(self) -> Namespace:
+    def parse_args(self) -> argparse.Namespace:
         """
-        Обертка над argparse. Принимает те же значения что и оригинал, возвращает Namespace с именованными полями.
+        Обертка над argparse. Принимает те же значения что и оригинал, возвращает argparse.Namespace с именованными полями.
         Значения в полях модифицированы валидаторами.
         """
         try:
