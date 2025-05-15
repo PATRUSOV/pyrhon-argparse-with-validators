@@ -26,8 +26,8 @@ class ArgumentParser(argparse.ArgumentParser):
         argument = super().add_argument(*args, **kwargs)
 
         if validator is not None:
-            if not callable(validator):
-                raise TypeError(f"{validator.__name__} not callable")
+            #if not callable(validator):
+                #raise TypeError(f"{validator.__name__} not callable")
             self._validators[argument.dest] = validator
 
         return argument
